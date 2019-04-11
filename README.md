@@ -13,40 +13,41 @@ status := gorrito.leaguePositions(&positions, "RANKED_SOLO_5x5", "GOLD", "I", "T
 fmt.Println(status, positions)
 ```
 All the endpoints are supported except the tournament ones.
+
 These are the functions with their corresponding structures and parameters
 
 ```golang
-func championRotations(champions *Champions)
+championRotations(champions *Champions)
 
-func (gorrito *Gorrito) leagueChallengerByQueue(leagueItem *LeagueItem, queue string)
-func (gorrito *Gorrito) leagueGrandMasterByQueue(leagueItem *LeagueItem, queue string)
-func (gorrito *Gorrito) leagueMasterByQueue(leagueItem *LeagueItem, queue string)
-func (gorrito *Gorrito) leagueLeagues(leagueItem *LeagueItem, leagueID string)
-func (gorrito *Gorrito) leaguePositional(leagues *[]string)
-func (gorrito *Gorrito) leaguePositionsBySummoner(positions *[]LeaguePosition, summonerID string)
-func (gorrito *Gorrito) leaguePositions(positions *[]LeaguePosition, queue string, tier string, division string, position string, page int)
+leagueChallengerByQueue(leagueItem *LeagueItem, queue string)
+leagueGrandMasterByQueue(leagueItem *LeagueItem, queue string)
+leagueMasterByQueue(leagueItem *LeagueItem, queue string)
+leagueLeagues(leagueItem *LeagueItem, leagueID string)
+leaguePositional(leagues *[]string)
+leaguePositionsBySummoner(positions *[]LeaguePosition, summonerID string)
+leaguePositions(positions *[]LeaguePosition, queue string, tier string, division string, position string, page int)
 
-func (gorrito *Gorrito) championMasteryBySummonerID(masteries *[]Mastery, account string)
-func (gorrito *Gorrito) championMasteryByBySummonerIDChampion(mastery *Mastery, account string, champion int)
-func (gorrito *Gorrito) championMasteryScoresBySummonerID(score *int, account string)
+championMasteryBySummonerID(masteries *[]Mastery, account string)
+championMasteryByBySummonerIDChampion(mastery *Mastery, account string, champion int)
+championMasteryScoresBySummonerID(score *int, account string)
 
-func (gorrito *Gorrito) matchByID(match *Match, matchID int64
-func (gorrito *Gorrito) matchesByAccountID(matchList *MatchList, account string, champion int, queue int, season int, endTime int64, beginTime int64, endIndex int, beginIndex int)
-func (gorrito *Gorrito) matchTimeline(timeline *MatchTimeline, matchID int64)
-func (gorrito *Gorrito) matchesByTournament(matches *[]int64, tournamentCode string)
-func (gorrito *Gorrito) matchByTournament(match *Match, matchID int64, tournamentCode string)
+matchByID(match *Match, matchID int64
+matchesByAccountID(matchList *MatchList, account string, champion int, queue int, season int, endTime int64, beginTime int64, endIndex int, beginIndex int)
+matchTimeline(timeline *MatchTimeline, matchID int64)
+matchesByTournament(matches *[]int64, tournamentCode string)
+matchByTournament(match *Match, matchID int64, tournamentCode string)
 
-func (gorrito *Gorrito) spectatorActiveGames(currentGameInfo *CurrentGameInfo, account string)
-func (gorrito *Gorrito) spectatorFeaturedGames(featuredGames *FeaturedGames)
+spectatorActiveGames(currentGameInfo *CurrentGameInfo, account string)
+spectatorFeaturedGames(featuredGames *FeaturedGames)
 
-func (gorrito *Gorrito) lolStatus(shardStatus *ShardStatus)
+lolStatus(shardStatus *ShardStatus)
 
-func (gorrito *Gorrito) lolStatus(shardStatus *ShardStatus)
+lolStatus(shardStatus *ShardStatus)
 
-func (gorrito *Gorrito) SummonerByAccountID(summoner *Summoner, account string)
-func (gorrito *Gorrito) SummonerByName(summoner *Summoner, account string)
-func (gorrito *Gorrito) SummonerByPuuid(summoner *Summoner, account string)
-func (gorrito *Gorrito) SummonerBySummonerID(summoner *Summoner, account string)
+SummonerByAccountID(summoner *Summoner, account string)
+SummonerByName(summoner *Summoner, account string)
+SummonerByPuuid(summoner *Summoner, account string)
+SummonerBySummonerID(summoner *Summoner, account string)
 
-func (gorrito *Gorrito) thirdPartyCodeBySummonerID(code *string, account string)
+thirdPartyCodeBySummonerID(code *string, account string)
 ```
