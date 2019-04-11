@@ -42,8 +42,6 @@ spectatorFeaturedGames(featuredGames *FeaturedGames)
 
 lolStatus(shardStatus *ShardStatus)
 
-lolStatus(shardStatus *ShardStatus)
-
 SummonerByAccountID(summoner *Summoner, account string)
 SummonerByName(summoner *Summoner, account string)
 SummonerByPuuid(summoner *Summoner, account string)
