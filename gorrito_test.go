@@ -1,12 +1,17 @@
 package gorrito
 
+import (
+	"fmt"
+	"testing"
+)
+
 /*
 	This file isn't a formal unit test file
 	I used these tests only to develop the library
 	To properly do unit testing of the library a mock server will be needed
 */
 
-const token = ""
+const token = "RGAPI-a005a943-5df9-43f0-8738-23c9b40dc8d8"
 const region = "EUW"
 
 // func Test_summonersByName(t *testing.T) {
@@ -51,13 +56,13 @@ const region = "EUW"
 // 	fmt.Println(err, champions)
 // }
 
-// func Test_leaguePositions(t *testing.T) {
-// 	gorrito := NewClient(token, &Config{Region: region})
+func Test_leaguePositions(t *testing.T) {
+	gorrito := NewClient(token, &Config{Region: region})
 
-// 	queue, err := gorrito.leagueLeaguesByQueueTierDivision("RANKED_SOLO_5x5", "GOLD", "II")
-// 	fmt.Println(err, queue)
+	queue, err := gorrito.LeagueLeaguesByQueueTierDivision("RANKED_SOLO_5x5", "GOLD", "II")
+	fmt.Println(err, queue)
 
-// }
+}
 
 // func Test_leaguePositions(t *testing.T) {
 // 	gorrito := Gorrito{region: region, token: token}

@@ -1,6 +1,8 @@
 package gorrito
 
-import "github.com/vaguilera/gorrito/models"
+import (
+	"github.com/vaguilera/gorrito/models"
+)
 
 func (c *Client) LeagueChallengerByQueue(queue string) (*models.LeagueList, error) {
 	litem := models.LeagueList{}
@@ -104,7 +106,7 @@ func (c *Client) LeagueLeaguesByQueueTierDivision(queue string, tier string, div
 	if err != nil {
 		return nil, err
 	}
-	err = c.unMarshall(body, litem)
+	err = c.unMarshall(body, &litem)
 	return litem, err
 }
 

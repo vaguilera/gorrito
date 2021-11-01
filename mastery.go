@@ -13,7 +13,7 @@ func (c *Client) ChampionMasteryBySummonerID(summonerId string) ([]models.Master
 		return nil, err
 	}
 
-	err = c.unMarshall(body, masteries)
+	err = c.unMarshall(body, &masteries)
 	return masteries, err
 }
 
