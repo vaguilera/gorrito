@@ -1,36 +1,32 @@
 package gorrito
 
 const (
-	summonerByAccountID  = "/lol/summoner/v4/summoners/by-account/{encryptedAccountId}"
-	summonerByName       = "/lol/summoner/v4/summoners/by-name/{summonerName}"
-	summonerByPuuid      = "/lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}"
-	summonerBySummonerID = "/lol/summoner/v4/summoners/{encryptedSummonerId}"
+	UriSummonerByAccountID  = "/lol/summoner/v4/summoners/by-account/{encryptedAccountId}"
+	UriSummonerByName       = "/lol/summoner/v4/summoners/by-name/{summonerName}666"
+	UriSummonerByPuuid      = "/lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}"
+	UriSummonerBySummonerID = "/lol/summoner/v4/summoners/{encryptedSummonerId}"
 
-	championMasteryBySummonerID           = "/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}"
-	championMasteryByBySummonerIDChampion = "/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}/by-champion/{championId}"
-	championMasteryScoresBySummonerID     = "/lol/champion-mastery/v4/scores/by-summoner/{encryptedSummonerId}"
+	UriChampionMasteryBySummonerID           = "/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}"
+	UriChampionMasteryByBySummonerIDChampion = "/lol/champion-mastery/v4/champion-masteries/by-summoner/{encryptedSummonerId}/by-champion/{championId}"
+	UriChampionMasteryScoresBySummonerID     = "/lol/champion-mastery/v4/scores/by-summoner/{encryptedSummonerId}"
 
-	championRotations = "/lol/platform/v3/champion-rotations"
+	UriChampionRotations = "/lol/platform/v3/champion-rotations"
 
-	leagueChallengerByQueue   = "/lol/league/v4/challengerleagues/by-queue/{queue}"
-	leagueGrandMasterByQueue  = "/lol/league/v4/grandmasterleagues/by-queue/{queue}"
-	leagueMasterByQueue       = "/lol/league/v4/masterleagues/by-queue/{queue}"
-	leagueLeagues             = "/lol/league/v4/leagues/{leagueId}"
-	leaguePositional          = "/lol/league/v4/positional-rank-queues"
-	leaguePositionsBySummoner = "/lol/league/v4/positions/by-summoner/{encryptedSummonerId}"
-	leaguePositions           = "/lol/league/v4/positions/{positionalQueue}/{tier}/{division}/{position}/{page}"
+	UriLeagueChallengerByQueue  = "/lol/league/v4/challengerleagues/by-queue/{queue}"
+	UriLeagueGrandMasterByQueue = "/lol/league/v4/grandmasterleagues/by-queue/{queue}"
+	UriLeagueMasterByQueue      = "/lol/league/v4/masterleagues/by-queue/{queue}"
+	UriLeagueLeagues            = "/lol/league/v4/leagues/{leagueId}"
+	UriLeagueBySummonerID       = "/lol/league/v4/entries/by-summoner/{encryptedSummonerId}"
+	UriLeagueQueueTierDivision  = "/lol/league/v4/entries/{queue}/{tier}/{division}"
 
-	spectatorActiveGames   = "/lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}"
-	spectatorFeaturedGames = "/lol/spectator/v4/featured-games"
+	UriSpectatorActiveGames   = "/lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}"
+	UriSpectatorFeaturedGames = "/lol/spectator/v4/featured-games"
 
-	thirdPartyCode = "/lol/platform/v4/third-party-code/by-summoner/{encryptedSummonerId}"
-	lolStatus      = "/lol/status/v3/shard-data"
+	UriLolStatus = "/lol/status/v4/platform-data"
 
-	matchByID           = "/lol/match/v4/matches/{matchId}"
-	matchByAccountID    = "/lol/match/v4/matchlists/by-account/{encryptedAccountId}"
-	matchTimeline       = "/lol/match/v4/timelines/by-match/{matchId}"
-	matchesByTournament = "/lol/match/v4/matches/by-tournament-code/{tournamentCode}/ids"
-	matchByTournament   = "/lol/match/v4/matches/{matchId}/by-tournament-code/{tournamentCode}"
+	UriMatchByID     = "/lol/match/v5/matches/{matchId}"
+	UriMatchByPuuid  = "/lol/match/v5/matches/by-puuid/{puuid}/ids"
+	UriMatchTimeline = "/lol/match/v5/matches/{matchId}/timeline"
 )
 
 var regions = map[string]string{
@@ -47,3 +43,15 @@ var regions = map[string]string{
 	"RU":   "ru.api.riotgames.com",
 	"PBE":  "pbe1.api.riotgames.com",
 }
+
+var regionsV5 = map[string]string{
+	"EUROPE":   "europe.api.riotgames.com",
+	"AMERICAS": "americas.api.riotgames.com",
+	"ASIA":     "asia.api.riotgames.com",
+}
+
+const (
+	RANKED_SOLO_5x5 = "RANKED_SOLO_5x5"
+	RANKED_FLEX_SR  = "RANKED_FLEX_SR"
+	RANKED_FLEX_TT  = "RANKED_FLEX_TT"
+)

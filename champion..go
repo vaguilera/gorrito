@@ -1,12 +1,22 @@
 package gorrito
 
-type Champions struct {
-	FreeChampionIds              []int `json:"freeChampionIds"`
-	FreeChampionIdsForNewPlayers []int `json:"freeChampionIdsForNewPlayers"`
-	MaxNewPlayerLevel            int   `json:"maxNewPlayerLevel"`
+import "github.com/vaguilera/gorrito/models"
+
+func (c *Client) ChampionRotations() (*models.Champions, error) {
+	champ := models.Champions{}
+	body, err := c.requestAPI(UriChampionRotations, nil)
+	if err != nil {
+		return nil, err
+	}
+	err = c.unMarshall(body, &champ)
+	return &champ, err
 }
 
-func (gorrito *Gorrito) championRotations(champions *Champions) int {
-
-	return gorrito.requestAPI(championRotations, champions, nil)
+func (c *Client) ChampionRotationsRaw() (*string, error) {
+	body, err := c.requestAPI(UriChampionRotations, nil)
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
 }

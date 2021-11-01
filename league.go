@@ -1,92 +1,118 @@
 package gorrito
 
-import "strconv"
+import "github.com/vaguilera/gorrito/models"
 
-type LeagueItem struct {
-	LeagueID string       `json:"leagueId"`
-	Tier     string       `json:"tier"`
-	Entries  []LeagueItem `json:"entries"`
-	Queue    string       `json:"queue"`
-	Name     string       `json:"name"`
+func (c *Client) LeagueChallengerByQueue(queue string) (*models.LeagueList, error) {
+	litem := models.LeagueList{}
+	body, err := c.requestAPI(UriLeagueChallengerByQueue, map[string]string{"queue": queue})
+	if err != nil {
+		return nil, err
+	}
+	err = c.unMarshall(body, &litem)
+	return &litem, err
 }
 
-type LeagueItemn struct {
-	SummonerName string     `json:"summonerName"`
-	HotStreak    bool       `json:"hotStreak"`
-	MiniSeries   MiniSeries `json:"miniSeries"`
-	Wins         int        `json:"wins"`
-	Veteran      bool       `json:"veteran"`
-	Losses       int        `json:"losses"`
-	Rank         string     `json:"rank"`
-	Inactive     bool       `json:"inactive"`
-	FreshBlood   bool       `json:"freshBlood"`
-	SummonerID   string     `json:"summonerId"`
-	LeaguePoints int        `json:"leaguePoints"`
+func (c *Client) LeagueChallengerByQueueRaw(queue string) (*string, error) {
+
+	body, err := c.requestAPI(UriLeagueChallengerByQueue, map[string]string{"queue": queue})
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
 }
 
-type MiniSeries struct {
-	Progress string `json:"progress"`
-	Losses   string `json:"losses"`
-	Target   int    `json:"target"`
-	Wins     int    `json:"wins"`
+func (c *Client) LeagueGrandMasterByQueue(leagueItem *models.LeagueItem, queue string) (*models.LeagueList, error) {
+	litem := models.LeagueList{}
+	body, err := c.requestAPI(UriLeagueGrandMasterByQueue, map[string]string{"queue": queue})
+	if err != nil {
+		return nil, err
+	}
+	err = c.unMarshall(body, &litem)
+	return &litem, err
 }
 
-type LeaguePosition struct {
-	Tier         string     `json:"tier"`
-	SummonerName string     `json:"summonerName"`
-	HotStreak    bool       `json:"hotStreak"`
-	MiniSeries   MiniSeries `json:"miniSeries"`
-	Wins         int        `json:"wins"`
-	Veteran      bool       `json:"veteran"`
-	Losses       int        `json:"losses"`
-	Rank         string     `json:"rank"`
-	LeagueName   string     `json:"leagueName"`
-	Inactive     bool       `json:"inactive"`
-	FreshBlood   bool       `json:"freshBlood"`
-	Position     string     `json:"position"`
-	LeagueID     string     `json:"leagueId"`
-	QueueType    string     `json:"queueType"`
-	SummonerID   string     `json:"summonerId"`
-	LeaguePoints int        `json:"leaguePoints"`
+func (c *Client) LeagueGrandMasterByQueueRaw(leagueItem *models.LeagueItem, queue string) (*string, error) {
+	body, err := c.requestAPI(UriLeagueGrandMasterByQueue, map[string]string{"queue": queue})
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
 }
 
-func (gorrito *Gorrito) leagueChallengerByQueue(leagueItem *LeagueItem, queue string) int {
-
-	return gorrito.requestAPI(leagueChallengerByQueue, leagueItem, map[string]string{"queue": queue})
+func (c *Client) LeagueMasterByQueue(leagueItem *models.LeagueItem, queue string) (*models.LeagueList, error) {
+	litem := models.LeagueList{}
+	body, err := c.requestAPI(UriLeagueMasterByQueue, map[string]string{"queue": queue})
+	if err != nil {
+		return nil, err
+	}
+	err = c.unMarshall(body, &litem)
+	return &litem, err
 }
 
-func (gorrito *Gorrito) leagueGrandMasterByQueue(leagueItem *LeagueItem, queue string) int {
-
-	return gorrito.requestAPI(leagueGrandMasterByQueue, leagueItem, map[string]string{"queue": queue})
+func (c *Client) LeagueMasterByQueueRaw(leagueItem *models.LeagueItem, queue string) (*string, error) {
+	body, err := c.requestAPI(UriLeagueMasterByQueue, map[string]string{"queue": queue})
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
 }
 
-func (gorrito *Gorrito) leagueMasterByQueue(leagueItem *LeagueItem, queue string) int {
-
-	return gorrito.requestAPI(leagueMasterByQueue, leagueItem, map[string]string{"queue": queue})
+func (c *Client) LeagueLeaguesById(leagueId string) (*models.LeagueList, error) {
+	litem := models.LeagueList{}
+	body, err := c.requestAPI(UriLeagueLeagues, map[string]string{"leagueId": leagueId})
+	if err != nil {
+		return nil, err
+	}
+	err = c.unMarshall(body, &litem)
+	return &litem, err
 }
 
-func (gorrito *Gorrito) leagueLeagues(leagueItem *LeagueItem, leagueID string) int {
-
-	return gorrito.requestAPI(leagueLeagues, leagueItem, map[string]string{"leagueId": leagueID})
+func (c *Client) LeagueLeaguesByIdRaw(leagueId string) (*string, error) {
+	body, err := c.requestAPI(UriLeagueLeagues, map[string]string{"leagueId": leagueId})
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
 }
 
-func (gorrito *Gorrito) leaguePositional(leagues *[]string) int {
-
-	return gorrito.requestAPI(leaguePositional, leagues, nil)
+func (c *Client) LeagueLeaguesBySummonerId(summonerId string) (*models.LeagueEntry, error) {
+	litem := models.LeagueEntry{}
+	body, err := c.requestAPI(UriLeagueBySummonerID, map[string]string{"encryptedSummonerId": summonerId})
+	if err != nil {
+		return nil, err
+	}
+	err = c.unMarshall(body, &litem)
+	return &litem, err
 }
 
-func (gorrito *Gorrito) leaguePositionsBySummoner(positions *[]LeaguePosition, summonerID string) int {
-
-	return gorrito.requestAPI(leaguePositionsBySummoner, positions, map[string]string{"encryptedSummonerId": summonerID})
+func (c *Client) LeagueLeaguesBySummonerIdRaw(summonerId string) (*string, error) {
+	body, err := c.requestAPI(UriLeagueBySummonerID, map[string]string{"encryptedSummonerId": summonerId})
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
 }
 
-func (gorrito *Gorrito) leaguePositions(positions *[]LeaguePosition, queue string, tier string, division string, position string, page int) int {
+func (c *Client) LeagueLeaguesByQueueTierDivision(queue string, tier string, division string) ([]models.LeagueEntry, error) {
+	litem := make([]models.LeagueEntry, 0)
+	body, err := c.requestAPI(UriLeagueQueueTierDivision, map[string]string{"queue": queue, "tier": tier, "division": division})
+	if err != nil {
+		return nil, err
+	}
+	err = c.unMarshall(body, litem)
+	return litem, err
+}
 
-	return gorrito.requestAPI(leaguePositions, positions, map[string]string{
-		"positionalQueue": queue,
-		"tier":            tier,
-		"division":        division,
-		"position":        position,
-		"page":            strconv.Itoa(page),
-	})
+func (c *Client) LeagueLeaguesByQueueTierDivisionRaw(queue string, tier string, division string) (*string, error) {
+	body, err := c.requestAPI(UriLeagueQueueTierDivision, map[string]string{"queue": queue, "tier": tier, "division": division})
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
 }

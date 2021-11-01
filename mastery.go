@@ -1,29 +1,67 @@
 package gorrito
 
-import "strconv"
+import (
+	"strconv"
 
-type Mastery struct {
-	ChampionLevel                int    `json:"championLevel"`
-	ChestGranted                 bool   `json:"chestGranted"`
-	ChampionPoints               int    `json:"championPoints"`
-	ChampionPointsSinceLastLevel int    `json:"championPointsSinceLastLevel"`
-	ChampionPointsUntilNextLevel int    `json:"championPointsUntilNextLevel"`
-	SummonerID                   string `json:"summonerId"`
-	TokensEarned                 int    `json:"tokensEarned"`
-	ChampionID                   int    `json:"championId"`
-	LastPlayTime                 int64  `json:"lastPlayTime"`
+	"github.com/vaguilera/gorrito/models"
+)
+
+func (c *Client) ChampionMasteryBySummonerID(summonerId string) ([]models.Mastery, error) {
+	masteries := make([]models.Mastery, 0)
+	body, err := c.requestAPI(UriChampionMasteryBySummonerID, map[string]string{"encryptedSummonerId": summonerId})
+	if err != nil {
+		return nil, err
+	}
+
+	err = c.unMarshall(body, masteries)
+	return masteries, err
 }
 
-func (gorrito *Gorrito) championMasteryBySummonerID(masteries *[]Mastery, account string) int {
+func (c *Client) ChampionMasteryByBySummonerIDChampion(summonerId string, champion int) (*models.Mastery, error) {
+	mastery := models.Mastery{}
 
-	return gorrito.requestAPI(championMasteryBySummonerID, masteries, map[string]string{"encryptedSummonerId": account})
+	body, err := c.requestAPI(UriChampionMasteryByBySummonerIDChampion, map[string]string{"encryptedSummonerId": summonerId, "championId": strconv.Itoa(champion)})
+	if err != nil {
+		return nil, err
+	}
+	err = c.unMarshall(body, &mastery)
+	return &mastery, err
 }
 
-func (gorrito *Gorrito) championMasteryByBySummonerIDChampion(mastery *Mastery, account string, champion int) int {
+func (c *Client) ChampionMasteryScoresBySummonerID(summonerId string) (int, error) {
+	var score int
+	body, err := c.requestAPI(UriChampionMasteryScoresBySummonerID, map[string]string{"encryptedSummonerId": summonerId})
+	if err != nil {
+		return 0, err
+	}
 
-	return gorrito.requestAPI(championMasteryByBySummonerIDChampion, mastery, map[string]string{"encryptedSummonerId": account, "championId": strconv.Itoa(champion)})
+	err = c.unMarshall(body, &score)
+	return score, err
 }
 
-func (gorrito *Gorrito) championMasteryScoresBySummonerID(score *int, account string) int {
-	return gorrito.requestAPI(championMasteryScoresBySummonerID, score, map[string]string{"encryptedSummonerId": account})
+func (c *Client) ChampionMasteryBySummonerIDRaw(summonerId string) (*string, error) {
+	body, err := c.requestAPI(UriChampionMasteryBySummonerID, map[string]string{"encryptedSummonerId": summonerId})
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
+}
+
+func (c *Client) ChampionMasteryByBySummonerIDChampionRaw(summonerId string, champion int) (*string, error) {
+	body, err := c.requestAPI(UriChampionMasteryByBySummonerIDChampion, map[string]string{"encryptedSummonerId": summonerId, "championId": strconv.Itoa(champion)})
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
+}
+
+func (c *Client) ChampionMasteryScoresBySummonerIDRaw(summonerId string) (*string, error) {
+	body, err := c.requestAPI(UriChampionMasteryScoresBySummonerID, map[string]string{"encryptedSummonerId": summonerId})
+	if err != nil {
+		return nil, err
+	}
+	resBody := string(body)
+	return &resBody, nil
 }
