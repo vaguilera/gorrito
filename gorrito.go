@@ -19,6 +19,8 @@ func NewClient(token string, cfg *Config) *Client {
 		region5 = "AMERICAS"
 	case "KR", "JP":
 		region5 = "ASIA"
+	case "PH", "SG", "TH", "TW", "VN":
+		region5 = "SEA"
 	case "EUNE", "EUW", "TR", "RU":
 		region5 = "EUROPE"
 	default:

@@ -1,60 +1,5 @@
 package models
 
-type Champions struct {
-	FreeChampionIds              []int `json:"freeChampionIds"`
-	FreeChampionIdsForNewPlayers []int `json:"freeChampionIdsForNewPlayers"`
-	MaxNewPlayerLevel            int   `json:"maxNewPlayerLevel"`
-}
-
-type LeagueList struct {
-	LeagueID string       `json:"leagueId"`
-	Tier     string       `json:"tier"`
-	Entries  []LeagueItem `json:"entries"`
-	Queue    string       `json:"queue"`
-	Name     string       `json:"name"`
-}
-
-type LeagueItem struct {
-	SummonerName string     `json:"summonerName"`
-	HotStreak    bool       `json:"hotStreak"`
-	MiniSeries   MiniSeries `json:"miniSeries"`
-	Wins         int        `json:"wins"`
-	Veteran      bool       `json:"veteran"`
-	Losses       int        `json:"losses"`
-	Rank         string     `json:"rank"`
-	Inactive     bool       `json:"inactive"`
-	FreshBlood   bool       `json:"freshBlood"`
-	SummonerID   string     `json:"summonerId"`
-	LeaguePoints int        `json:"leaguePoints"`
-}
-
-type MiniSeries struct {
-	Progress string `json:"progress"`
-	Losses   string `json:"losses"`
-	Target   int    `json:"target"`
-	Wins     int    `json:"wins"`
-}
-
-type LeagueEntry struct {
-	LeagueID  string `json:"leagueId"`
-	QueueType string `json:"queueType"`
-	Tier      string `json:"tier"`
-	Rank      string `json:"Rank"`
-	LeagueItem
-}
-
-type Mastery struct {
-	ChampionLevel                int    `json:"championLevel"`
-	ChestGranted                 bool   `json:"chestGranted"`
-	ChampionPoints               int    `json:"championPoints"`
-	ChampionPointsSinceLastLevel int    `json:"championPointsSinceLastLevel"`
-	ChampionPointsUntilNextLevel int    `json:"championPointsUntilNextLevel"`
-	SummonerID                   string `json:"summonerId"`
-	TokensEarned                 int    `json:"tokensEarned"`
-	ChampionID                   int    `json:"championId"`
-	LastPlayTime                 int64  `json:"lastPlayTime"`
-}
-
 type Match struct {
 	Metadata MatchMetaData `json:"metadata"`
 	Info     MatchInfo     `json:"info"`
@@ -76,7 +21,7 @@ type MatchInfo struct {
 	GameStartTimestamp int64              `json:"gameStartTimestamp"`
 	GameType           string             `json:"gameType"`
 	GameVersion        string             `json:"gameVersion"`
-	MapId              int                `json:"gameMapId"`
+	MapId              int                `json:"mapId"`
 	Participants       []MatchParticipant `json:"participants"`
 	PlatformId         string             `json:"platformId"`
 	QueueId            int                `json:"queueId"`
@@ -192,7 +137,7 @@ type MatchParticipant struct {
 	TotalMinionsKilled             int    `json:"totalMinionsKilled"`
 	TotalTimeCCDealt               int    `json:"totalTimeCCDealt"`
 	TotalTimeSpentDead             int    `json:"totalTimeSpentDead"`
-	TotalUnitsHealed               int    `json:"totalUnitsHealedv"`
+	TotalUnitsHealed               int    `json:"totalUnitsHealed"`
 	TripleKills                    int    `json:"tripleKills"`
 	TrueDamageDealt                int    `json:"trueDamageDealt"`
 	TrueDamageDealtToChampions     int    `json:"trueDamageDealtToChampions"`
@@ -204,7 +149,7 @@ type MatchParticipant struct {
 	VisionScore                    int    `json:"visionScore"`
 	VisionWardsBoughtInGame        int    `json:"visionWardsBoughtInGame"`
 	WardsKilled                    int    `json:"wardsKilled"`
-	WardsPlaced                    int    `json:"wardsPlacedv"`
+	WardsPlaced                    int    `json:"wardsPlaced"`
 	Win                            bool   `json:"win"`
 }
 
@@ -230,66 +175,7 @@ type MatchObjective struct {
 	Kills int  `json:"kills"`
 }
 
-type MatchList struct {
-	Matches []struct {
-		Lane       string `json:"lane"`
-		GameID     int64  `json:"gameId"`
-		Champion   int    `json:"champion"`
-		PlatformID string `json:"platformId"`
-		Timestamp  int64  `json:"timestamp"`
-		Queue      int    `json:"queue"`
-		Role       string `json:"role"`
-		Season     int    `json:"season"`
-	} `json:"matches"`
-	EndIndex   int `json:"endIndex"`
-	StartIndex int `json:"startIndex"`
-	TotalGames int `json:"totalGames"`
-}
-
 type MatchesList []string
-
-type content struct {
-	Locale  string `json:"locale"`
-	Content string `json:"content"`
-}
-
-type status struct {
-	ID                int       `json:"id"`
-	MaintenanceStatus string    `json:"maintenance_status"`
-	IncidentSeverity  string    `json:"incident_severity"`
-	Titles            []content `json:"titles"`
-	Updates           []struct {
-		ID               int       `json:"id"`
-		Author           string    `json:"author"`
-		Publish          bool      `json:"publish"`
-		PublishLocations []string  `json:"publish_locations"`
-		Translations     []content `json:"translations"`
-		CreatedAt        string    `json:"created_at"`
-		UpdatedAt        string    `json:"updated_at"`
-	} `json:"updates"`
-	CreatedAt string   `json:"created_at"`
-	ArchiveAt string   `json:"archive_at"`
-	UpdatedAt string   `json:"updated_at"`
-	Platforms []string `json:"platforms"`
-}
-
-type ShardStatus struct {
-	Id           string   `json:"id"`
-	Name         string   `json:"name"`
-	Locales      []string `json:"locales"`
-	Maintenances []status `json:"maintenances"`
-	Incidents    []status `json:"incidents"`
-}
-
-type Summoner struct {
-	ProfileIconID int    `json:"profileIconId"`
-	Name          string `json:"Name"`
-	Puuid         string `json:"puuid"`
-	SummonerLevel int    `json:"summonerLevel"`
-	AccountID     string `json:"accountId"`
-	ID            string `json:"id"`
-	RevisionDate  int64  `json:"revisionDate"`
-}
 
 type MatchTimeLine struct {
 	Metadata MatchMetaData     `json:"metadata"`
@@ -303,15 +189,15 @@ type MatchTimeLineInfo struct {
 	Participants  []struct {
 		ParticipantId int    `json:"participantId"`
 		Puuid         string `json:"puuid"`
-	}
+	} `json:"participants"`
 }
 
 type MatchTimeLineFrame struct {
-	events []struct {
+	Events []struct {
 		RealTimestamp int64  `json:"realTimestamp"`
 		Timestamp     int64  `json:"timestamp"`
 		Type          string `json:"type"`
-	}
+	} `json:"events"`
 	ParticipantFrames struct {
 		One   ParticipantFrame `json:"1"`
 		Two   ParticipantFrame `json:"2"`
@@ -382,77 +268,4 @@ type ParticipantFrame struct {
 	TimeEnemySpentControlled int `json:"timeEnemySpentControlled"`
 	TotalGold                int `json:"totalGold"`
 	Xp                       int `json:"xp"`
-}
-
-type CurrentGameInfo struct {
-	GameID            int64  `json:"gameId"`
-	GameStartTime     int64  `json:"gameStartTime"`
-	PlatformID        string `json:"platformId"`
-	GameMode          string `json:"gameMode"`
-	MapID             int    `json:"mapId"`
-	GameType          string `json:"gameType"`
-	GameQueueConfigID int    `json:"gameQueueConfigId"`
-	Observers         struct {
-		EncryptionKey string `json:"encryptionKey"`
-	} `json:"observers"`
-	Participants    []ParticipantGameInfo `json:"participants"`
-	GameLength      int                   `json:"gameLength"`
-	BannedChampions []struct {
-		TeamID     int   `json:"teamId"`
-		ChampionID int64 `json:"championId"`
-		PickTurn   int64 `json:"pickTurn"`
-	} `json:"bannedChampions"`
-}
-
-type ParticipantGameInfo struct {
-	ProfileIconID            int    `json:"profileIconId"`
-	ChampionID               int    `json:"championId"`
-	SummonerName             string `json:"summonerName"`
-	GameCustomizationObjects []struct {
-		Category string `json:"category"`
-		Content  string `json:"content"`
-	} `json:"gameCustomizationObjects"`
-	Bot   bool `json:"bot"`
-	Perks struct {
-		PerkStyle    int64   `json:"perkStyle"`
-		PerkIds      []int64 `json:"perkIds"`
-		PerkSubStyle int64   `json:"perkSubStyle"`
-	} `json:"perks"`
-	Spell2ID   int64  `json:"spell2Id"`
-	TeamID     int64  `json:"teamId"`
-	Spell1ID   int64  `json:"spell1Id"`
-	SummonerID string `json:"summonerId"`
-}
-
-type FeaturedGames struct {
-	ClientRefreshInterval int64 `json:"clientRefreshInterval"`
-	GameList              []struct {
-		GameID            int64  `json:"gameId"`
-		GameStartTime     int64  `json:"gameStartTime"`
-		PlatformID        string `json:"platformId"`
-		GameMode          string `json:"gameMode"`
-		MapID             int64  `json:"mapId"`
-		GameType          string `json:"gameType"`
-		GameQueueConfigID int64  `json:"gameQueueConfigId"`
-		Observers         struct {
-			EncryptionKey string `json:"encryptionKey"`
-		} `json:"observers"`
-		Participants    []ParticipantFeatured `json:"participants"`
-		GameLength      int64                 `json:"gameLength"`
-		BannedChampions []struct {
-			TeamID     int   `json:"teamId"`
-			ChampionID int64 `json:"championId"`
-			PickTurn   int64 `json:"pickTurn"`
-		} `json:"bannedChampions"`
-	} `json:"gameList"`
-}
-
-type ParticipantFeatured struct {
-	ProfileIconID int    `json:"profileIconId"`
-	ChampionID    int    `json:"championId"`
-	SummonerName  string `json:"summonerName"`
-	Bot           bool   `json:"bot"`
-	Spell2ID      int64  `json:"spell2Id"`
-	TeamID        int64  `json:"teamId"`
-	Spell1ID      int64  `json:"spell1Id"`
 }

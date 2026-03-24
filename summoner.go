@@ -1,8 +1,6 @@
 package gorrito
 
 import (
-	"net/url"
-
 	"github.com/vaguilera/gorrito/models"
 )
 
@@ -27,14 +25,6 @@ func (c *Client) performSummonerQueryRaw(url string, params map[string]string) (
 	return &resBody, nil
 }
 
-func (c *Client) SummonerByAccountID(account string) (*models.Summoner, error) {
-	return c.performSummonerQuery(UriSummonerByAccountID, map[string]string{"encryptedAccountId": account})
-}
-
-func (c *Client) SummonerByName(name string) (*models.Summoner, error) {
-	return c.performSummonerQuery(UriSummonerByName, map[string]string{"summonerName": url.QueryEscape(name)})
-}
-
 func (c *Client) SummonerByPuuid(puuid string) (*models.Summoner, error) {
 	return c.performSummonerQuery(UriSummonerByPuuid, map[string]string{"encryptedPUUID": puuid})
 }
@@ -44,14 +34,6 @@ func (c *Client) SummonerBySummonerID(summonerId string) (*models.Summoner, erro
 }
 
 // Raw Versions
-func (c *Client) SummonerByAccountIDRaw(account string) (*string, error) {
-	return c.performSummonerQueryRaw(UriSummonerByAccountID, map[string]string{"encryptedAccountId": account})
-}
-
-func (c *Client) SummonerByNameRaw(name string) (*string, error) {
-	return c.performSummonerQueryRaw(UriSummonerByName, map[string]string{"summonerName": url.QueryEscape(name)})
-}
-
 func (c *Client) SummonerByPuuidRaw(puuid string) (*string, error) {
 	return c.performSummonerQueryRaw(UriSummonerByPuuid, map[string]string{"encryptedPUUID": puuid})
 }

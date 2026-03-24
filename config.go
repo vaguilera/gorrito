@@ -1,8 +1,6 @@
 package gorrito
 
 const (
-	UriSummonerByAccountID  = "/lol/summoner/v4/summoners/by-account/{encryptedAccountId}"
-	UriSummonerByName       = "/lol/summoner/v4/summoners/by-name/{summonerName}666"
 	UriSummonerByPuuid      = "/lol/summoner/v4/summoners/by-puuid/{encryptedPUUID}"
 	UriSummonerBySummonerID = "/lol/summoner/v4/summoners/{encryptedSummonerId}"
 
@@ -19,8 +17,8 @@ const (
 	UriLeagueBySummonerID       = "/lol/league/v4/entries/by-summoner/{encryptedSummonerId}"
 	UriLeagueQueueTierDivision  = "/lol/league/v4/entries/{queue}/{tier}/{division}"
 
-	UriSpectatorActiveGames   = "/lol/spectator/v4/active-games/by-summoner/{encryptedSummonerId}"
-	UriSpectatorFeaturedGames = "/lol/spectator/v4/featured-games"
+	UriSpectatorActiveGames   = "/lol/spectator/v5/active-games/by-summoner/{encryptedPUUID}"
+	UriSpectatorFeaturedGames = "/lol/spectator/v5/featured-games"
 
 	UriLolStatus = "/lol/status/v4/platform-data"
 
@@ -39,7 +37,12 @@ var regions = map[string]string{
 	"LAS":  "la2.api.riotgames.com",
 	"NA":   "na1.api.riotgames.com",
 	"OCE":  "oc1.api.riotgames.com",
+	"PH":   "ph2.api.riotgames.com",
+	"SG":   "sg2.api.riotgames.com",
+	"TH":   "th2.api.riotgames.com",
 	"TR":   "tr1.api.riotgames.com",
+	"TW":   "tw2.api.riotgames.com",
+	"VN":   "vn2.api.riotgames.com",
 	"RU":   "ru.api.riotgames.com",
 	"PBE":  "pbe1.api.riotgames.com",
 }
@@ -48,6 +51,7 @@ var regionsV5 = map[string]string{
 	"EUROPE":   "europe.api.riotgames.com",
 	"AMERICAS": "americas.api.riotgames.com",
 	"ASIA":     "asia.api.riotgames.com",
+	"SEA":      "sea.api.riotgames.com",
 }
 
 const (
