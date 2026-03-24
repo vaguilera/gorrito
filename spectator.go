@@ -2,9 +2,9 @@ package gorrito
 
 import "github.com/vaguilera/gorrito/models"
 
-func (c *Client) SpectatorActiveGames(summonerId string) (*models.CurrentGameInfo, error) {
+func (c *Client) SpectatorActiveGames(puuid string) (*models.CurrentGameInfo, error) {
 	currentGameInfo := models.CurrentGameInfo{}
-	body, err := c.requestAPI(UriSpectatorActiveGames, map[string]string{"encryptedSummonerId": summonerId})
+	body, err := c.requestAPI(UriSpectatorActiveGames, map[string]string{"encryptedPUUID": puuid})
 	if err != nil {
 		return nil, err
 	}
@@ -23,8 +23,8 @@ func (c *Client) SpectatorFeaturedGames() (*models.FeaturedGames, error) {
 	return &featuredGames, err
 }
 
-func (c *Client) SpectatorActiveGamesRaw(summonerId string) (*string, error) {
-	body, err := c.requestAPI(UriSpectatorActiveGames, map[string]string{"encryptedSummonerId": summonerId})
+func (c *Client) SpectatorActiveGamesRaw(puuid string) (*string, error) {
+	body, err := c.requestAPI(UriSpectatorActiveGames, map[string]string{"encryptedPUUID": puuid})
 	if err != nil {
 		return nil, err
 	}
