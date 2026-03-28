@@ -25,6 +25,10 @@ const (
 	UriMatchByID     = "/lol/match/v5/matches/{matchId}"
 	UriMatchByPuuid  = "/lol/match/v5/matches/by-puuid/{puuid}/ids"
 	UriMatchTimeline = "/lol/match/v5/matches/{matchId}/timeline"
+
+	UriAccountByPuuid            = "/riot/account/v1/accounts/by-puuid/{puuid}"
+	UriAccountByRiotID           = "/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}"
+	UriAccountActiveShardByPuuid = "/riot/account/v1/active-shards/by-game/{game}/by-puuid/{puuid}"
 )
 
 var regions = map[string]string{
