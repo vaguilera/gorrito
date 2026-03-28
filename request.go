@@ -26,11 +26,16 @@ func (c *Client) parseURL(endpoint string, params map[string]string) string {
 			endpoint = strings.Replace(endpoint, "{"+k+"}", v, -1)
 		}
 	}
-	if strings.Contains(endpoint, "/v5/") {
+	if isRegionalEndpoint(endpoint) {
 		return "https://" + regionsV5[c.regionV5] + endpoint
 	}
 	return "https://" + regions[c.region] + endpoint
 
+}
+
+func isRegionalEndpoint(endpoint string) bool {
+	return strings.HasPrefix(endpoint, "/lol/match/v5/") ||
+		strings.HasPrefix(endpoint, "/riot/account/v1/")
 }
 
 func (c *Client) unMarshall(body []byte, st interface{}) error {
