@@ -55,8 +55,17 @@ func (c *Client) doRequest(endpoint string) ([]byte, error) {
 	}
 	req.Header.Set("User-Agent", "GorRito Lib by V.Aguilera")
 	req.Header.Set("X-Riot-Token", c.token)
+
+	if c.debug {
+		fmt.Printf("[gorrito][request] %s %s\n", req.Method, req.URL.String())
+		fmt.Printf("[gorrito][request][headers] %v\n", req.Header)
+	}
+
 	resp, err := client.Do(req)
 	if err != nil {
+		if c.debug {
+			fmt.Printf("[gorrito][error] %v\n", err)
+		}
 		return nil, err
 	}
 	defer resp.Body.Close()
@@ -64,6 +73,12 @@ func (c *Client) doRequest(endpoint string) ([]byte, error) {
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
+	}
+
+	if c.debug {
+		fmt.Printf("[gorrito][response] status=%s\n", resp.Status)
+		fmt.Printf("[gorrito][response][headers] %v\n", resp.Header)
+		fmt.Printf("[gorrito][response][body] %s\n", string(body))
 	}
 
 	if resp.StatusCode != 200 {

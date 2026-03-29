@@ -11,6 +11,26 @@ queue, err := client.LeagueLeaguesByQueueTierDivision("RANKED_SOLO_5x5", "GOLD",
 fmt.Println(queue, err)
 ```
 
+### Debug mode
+You can enable request/response debugging from the client config:
+
+```golang
+client := gorrito.NewClient(token, &gorrito.Config{
+    Region: "EUW",
+    Debug:  true,
+})
+```
+
+When `Debug` is `true`, Gorrito prints:
+- HTTP method and URL
+- request headers
+- response status
+- response headers
+- response body
+
+There is also a runnable example in `cmd/debug/main.go` that calls:
+`client.AccountByRiotID("HeladoDeLentejas", "#TAG")`.
+
 V5 endpoints supported  
 Included package 'models' contains all the structs for the returned data
 
