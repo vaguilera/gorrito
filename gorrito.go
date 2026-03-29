@@ -4,11 +4,13 @@ type Client struct {
 	region   string
 	token    string
 	regionV5 string
+	debug    bool
 }
 
 // Move it to another file if it grows
 type Config struct {
 	Region string
+	Debug  bool
 }
 
 func NewClient(token string, cfg *Config) *Client {
@@ -34,6 +36,7 @@ func NewClient(token string, cfg *Config) *Client {
 		token:    token,
 		region:   cfg.Region,
 		regionV5: region5,
+		debug:    cfg.Debug,
 	}
 
 	return &c
