@@ -29,7 +29,7 @@ When `Debug` is `true`, Gorrito prints:
 - response body
 
 There is also a runnable example in `cmd/debug/main.go` that calls:
-`client.AccountByRiotID("HeladoDeLentejas", "#TAG")`.
+`client.AccountByRiotID("HeladoDeLentejas", "TAG")`.
 
 V5 endpoints supported  
 Included package 'models' contains all the structs for the returned data

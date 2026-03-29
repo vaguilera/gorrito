@@ -28,7 +28,7 @@ func main() {
 		return
 	}
 
-	account, err := client.AccountByRiotID("HeladoDeLentejas", "#TAG")
+	account, err := client.AccountByRiotID("HeladoDeLentejas", "TAG")
 	if err != nil {
 		fmt.Printf("account lookup failed: %v\n", err)
 		return

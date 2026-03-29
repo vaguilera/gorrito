@@ -53,12 +53,14 @@ func (c *Client) doRequest(endpoint string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "GorRito Lib by V.Aguilera")
+	req.Header.Set("User-Agent", "GorRito Lib by https://github.com/vaguilera/gorrito")
 	req.Header.Set("X-Riot-Token", c.token)
 
 	if c.debug {
 		fmt.Printf("[gorrito][request] %s %s\n", req.Method, req.URL.String())
-		fmt.Printf("[gorrito][request][headers] %v\n", req.Header)
+		for k, v := range req.Header {
+			fmt.Printf("[gorrito][request][headers] %s: %v\n", k, v)
+		}
 	}
 
 	resp, err := client.Do(req)
@@ -77,7 +79,9 @@ func (c *Client) doRequest(endpoint string) ([]byte, error) {
 
 	if c.debug {
 		fmt.Printf("[gorrito][response] status=%s\n", resp.Status)
-		fmt.Printf("[gorrito][response][headers] %v\n", resp.Header)
+		for k, v := range resp.Header {
+			fmt.Printf("[gorrito][response][headers] %s: %v\n", k, v)
+		}
 		fmt.Printf("[gorrito][response][body] %s\n", string(body))
 	}
 
