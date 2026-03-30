@@ -1,16 +1,19 @@
 package gorrito
 
 type Client struct {
-	region   string
-	token    string
-	regionV5 string
-	debug    bool
+	region      string
+	token       string
+	regionV5    string
+	debug       bool
+	rateLimiter *rateLimiter
 }
 
 // Move it to another file if it grows
 type Config struct {
-	Region string
-	Debug  bool
+	Region             string
+	Debug              bool
+	RateLimitPerSecond int
+	RateLimitPerMinute int
 }
 
 func NewClient(token string, cfg *Config) *Client {
@@ -33,10 +36,11 @@ func NewClient(token string, cfg *Config) *Client {
 	}
 
 	c := Client{
-		token:    token,
-		region:   cfg.Region,
-		regionV5: region5,
-		debug:    cfg.Debug,
+		token:       token,
+		region:      cfg.Region,
+		regionV5:    region5,
+		debug:       cfg.Debug,
+		rateLimiter: newRateLimiter(cfg.RateLimitPerSecond, cfg.RateLimitPerMinute),
 	}
 
 	return &c

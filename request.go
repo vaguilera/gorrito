@@ -46,6 +46,8 @@ func (c *Client) unMarshall(body []byte, st interface{}) error {
 
 func (c *Client) doRequest(endpoint string) ([]byte, error) {
 
+	c.rateLimiter.wait()
+
 	client := &http.Client{}
 	client.Timeout = time.Second * 15
 

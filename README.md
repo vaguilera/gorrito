@@ -22,6 +22,20 @@ matches, err := client.MatchesByPuuid("my-puuid", options)
 fmt.Println(matches, err)
 ```
 
+### Rate limit configuration
+You can throttle outgoing requests per client instance:
+
+```golang
+client := gorrito.NewClient(token, &gorrito.Config{
+    Region:             "EUW",
+    RateLimitPerSecond: 20,
+    RateLimitPerMinute: 100,
+})
+```
+
+Both limits are evaluated at the same time. If one is reached, Gorrito waits before sending the next request.
+Set either value to `0` to disable that specific limit.
+
 ### Debug mode
 You can enable request/response debugging from the client config:
 
