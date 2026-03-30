@@ -11,6 +11,17 @@ queue, err := client.LeagueLeaguesByQueueTierDivision("RANKED_SOLO_5x5", "GOLD",
 fmt.Println(queue, err)
 ```
 
+### Match filters with constants
+```golang
+options := client.NewMatchesByPuuidOptions().
+    Queue(gorrito.QueueRankedSolo).
+    Type(gorrito.MatchTypeRanked).
+    Count(20)
+
+matches, err := client.MatchesByPuuid("my-puuid", options)
+fmt.Println(matches, err)
+```
+
 ### Debug mode
 You can enable request/response debugging from the client config:
 
